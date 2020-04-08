@@ -13,8 +13,8 @@ class Program
             activitySource => true, // subscribe all sources
             (activitySource, name, kind, context, tags, links) => ActivityDataRequest.AllData,
             (activitySource, name, kind, parentId, tags, links) => ActivityDataRequest.AllData,
-            activity => processor.OnActivityStarted(activity),
-            activity => processor.OnActivityStopped(activity)
+            processor.OnActivityStarted,
+            processor.OnActivityStopped
         );
 
         using (var foo = source.StartActivity("foo"))
