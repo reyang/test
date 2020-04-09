@@ -18,6 +18,7 @@ class Program
                 bar?.SetCustomProperty("alias", "reyang");
             }
         }
+
         return 0;
     }
 }
