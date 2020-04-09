@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 public static class ExtensionMethods
 {
-    public static void RegisterProcessor(this ActivitySource source, DemoProcessor processor)
+    public static void RegisterProcessor(this ActivitySource source, IActivityProcessor processor)
     {
         ActivitySource.AddActivityListener(
             activitySource => source == activitySource,
