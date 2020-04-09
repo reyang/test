@@ -12,7 +12,7 @@ class Program
 
         using (var foo = source.StartActivity("foo"))
         {
-            using (var bar = source.StartActivity("bar", ActivityKind.Internal))
+            using (var bar = source.StartActivity("bar", ActivityKind.Client))
             {
                 bar.DisplayName = "baz"; // bar?.SetDisplayName("baz");
                 bar?.SetCustomProperty("alias", "reyang");
