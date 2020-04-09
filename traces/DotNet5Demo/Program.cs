@@ -14,8 +14,7 @@ class Program
         {
             using (var bar = source.StartActivity("bar", ActivityKind.Internal))
             {
-                bar.DisplayName = "baz";
-                // bar?.SetDisplayName("baz");
+                bar.DisplayName = "baz"; // bar?.SetDisplayName("baz");
                 bar?.SetCustomProperty("alias", "reyang");
             }
         }
