@@ -8,19 +8,15 @@ class Program
     static int Main(string[] args)
     {
         var source = new ActivitySource("DemoSource");
-        var processor = new DemoProcessor();
-        ActivitySource.AddActivityListener(
-            activitySource => true, // subscribe all sources
-            (activitySource, name, kind, context, tags, links) => ActivityDataRequest.AllData,
-            (activitySource, name, kind, parentId, tags, links) => ActivityDataRequest.AllData,
-            processor.OnActivityStarted,
-            processor.OnActivityStopped
-        );
+        source.RegisterProcessor(new DemoProcessor());
 
         using (var foo = source.StartActivity("foo"))
         {
             using (var bar = source.StartActivity("bar", ActivityKind.Internal))
             {
+                bar.DisplayName = "baz";
+                // bar?.SetDisplayName("baz");
+                bar?.SetCustomProperty("alias", "reyang");
             }
         }
         return 0;

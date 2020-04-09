@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-class DemoProcessor
+public class DemoProcessor
 {
     public void OnActivityStarted(Activity activity)
     {
