@@ -1,8 +1,8 @@
 ﻿using System;
 
+using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
-using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 
 class FoobarChannel : ITelemetryChannel
