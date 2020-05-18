@@ -31,12 +31,27 @@ class FoobarChannel : ITelemetryChannel
 
     public void Send(ITelemetry item)
     {
-        Console.WriteLine($"Foobar.Send({item}) called");
+        Console.WriteLine($"Foobar.Send({item}) called.");
     }
 
     public void Flush()
     {
-        Console.WriteLine($"Foobar.Flush() called");
+        Console.WriteLine($"Foobar.Flush() called.");
+    }
+}
+
+class MyTelemetryProcessor : ITelemetryProcessor
+{
+   private readonly ITelemetryProcessor Next;
+
+   public MyTelemetryProcessor(ITelemetryProcessor next)
+   {
+       this.Next = next;
+   }
+   public void Process(ITelemetry item)
+   {
+       Console.WriteLine($"TelemetryProcessor called.");
+       this.Next.Process(item);
     }
 }
 
@@ -49,6 +64,7 @@ class Program
         sink.Initialize(config);
         config.TelemetrySinks.Add(sink);
         // config.TelemetryChannel = new FoobarChannel();
+        config.TelemetryProcessorChainBuilder.Use(next => new MyTelemetryProcessor(next));
         config.TelemetryProcessorChainBuilder.Build();
         // TelemetryClient is thread safe
         // you want to create only one instance and use it across the application
@@ -62,7 +78,7 @@ class Program
         client.Flush();
         foreach (var s in config.TelemetrySinks)
         {
-            Console.WriteLine($"Trying to flush TelemetrySink(Name={s.Name})");
+            Console.WriteLine($"Trying to flush TelemetrySink(Name={s.Name}).");
             s.TelemetryChannel.Flush();
         }
     }
