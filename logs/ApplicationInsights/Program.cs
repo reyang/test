@@ -48,9 +48,26 @@ class MyTelemetryProcessor : ITelemetryProcessor
    {
        this.Next = next;
    }
+
    public void Process(ITelemetry item)
    {
-       Console.WriteLine($"TelemetryProcessor called.");
+       Console.WriteLine($"MyTelemetryProcessor called.");
+       this.Next.Process(item);
+    }
+}
+
+class MyTelemetryProcessor2 : ITelemetryProcessor
+{
+   private readonly ITelemetryProcessor Next;
+
+   public MyTelemetryProcessor2(ITelemetryProcessor next)
+   {
+       this.Next = next;
+   }
+
+   public void Process(ITelemetry item)
+   {
+       Console.WriteLine($"MyTelemetryProcessor2 called.");
        this.Next.Process(item);
     }
 }
@@ -65,6 +82,7 @@ class Program
         config.TelemetrySinks.Add(sink);
         // config.TelemetryChannel = new FoobarChannel();
         config.TelemetryProcessorChainBuilder.Use(next => new MyTelemetryProcessor(next));
+        config.TelemetryProcessorChainBuilder.Use(next => new MyTelemetryProcessor2(next));
         config.TelemetryProcessorChainBuilder.Build();
         // TelemetryClient is thread safe
         // you want to create only one instance and use it across the application
