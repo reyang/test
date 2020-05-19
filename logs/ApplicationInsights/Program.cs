@@ -42,33 +42,33 @@ class FoobarChannel : ITelemetryChannel
 
 class MyTelemetryProcessor : ITelemetryProcessor
 {
-   private readonly ITelemetryProcessor Next;
+    private readonly ITelemetryProcessor Next;
 
-   public MyTelemetryProcessor(ITelemetryProcessor next)
-   {
-       this.Next = next;
-   }
+    public MyTelemetryProcessor(ITelemetryProcessor next)
+    {
+        this.Next = next;
+    }
 
-   public void Process(ITelemetry item)
-   {
-       Console.WriteLine($"MyTelemetryProcessor called.");
-       this.Next.Process(item);
+    public void Process(ITelemetry item)
+    {
+        Console.WriteLine($"MyTelemetryProcessor called.");
+        this.Next.Process(item);
     }
 }
 
 class MyTelemetryProcessor2 : ITelemetryProcessor
 {
-   private readonly ITelemetryProcessor Next;
+    private readonly ITelemetryProcessor Next;
 
-   public MyTelemetryProcessor2(ITelemetryProcessor next)
-   {
-       this.Next = next;
-   }
+    public MyTelemetryProcessor2(ITelemetryProcessor next)
+    {
+        this.Next = next;
+    }
 
-   public void Process(ITelemetry item)
-   {
-       Console.WriteLine($"MyTelemetryProcessor2 called.");
-       this.Next.Process(item);
+    public void Process(ITelemetry item)
+    {
+        Console.WriteLine($"MyTelemetryProcessor2 called.");
+        this.Next.Process(item);
     }
 }
 
