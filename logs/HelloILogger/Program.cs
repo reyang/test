@@ -4,13 +4,21 @@ class Program
 {
     static int Main(string[] args)
     {
-        var loggerFactory = LoggerFactory.Create(builder =>
+        using var loggerFactory = LoggerFactory.Create(builder =>
         {
-            builder.AddConsole();
+            builder.AddConsole(options => { options.IncludeScopes = true; });
         });
         var logger = loggerFactory.CreateLogger<Program>();
+
         logger.LogInformation("Hello, world!");
-        loggerFactory.Dispose(); // this will flush the logs
+
+        // Logging using a manual scope
+        using (logger.BeginScope(new { A = 1 }))
+        {
+            logger.LogInformation("This is a test");
+        }
+
         return 0;
+        // as loggerFactory gets disposed, this will flush the logs
     }
 }
