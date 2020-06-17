@@ -38,6 +38,9 @@ class Program
             }
         }
 
+        logger.Eat(new Food { Name = "burger from chick-fil-a", Price = 5.99 });
+        logger.Sleep();
+
         return 0;
         // as loggerFactory gets disposed, this will flush the logs
     }
