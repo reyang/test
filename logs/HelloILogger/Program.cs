@@ -18,6 +18,7 @@ class Program
 
         using var loggerFactory = LoggerFactory.Create(builder =>
         {
+            builder.AddAwesome();
             builder.AddConsole(options => { options.IncludeScopes = true; });
             builder.Configure(options => options.ActivityTrackingOptions =
                 ActivityTrackingOptions.TraceId |
