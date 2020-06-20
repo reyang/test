@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 
 class Program
@@ -40,6 +41,10 @@ class Program
                     logger.LogInformation("This is a test");
                 }
                 logger.Eat(new Food { Name = "burger from chick-fil-a", Price = 5.99 });
+                logger.LogEx(new Dictionary<string, object>{
+                    ["foo"] = "1",
+                    ["bar"] = "2",
+                }, 1);
             }
         }
 
