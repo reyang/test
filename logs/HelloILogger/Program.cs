@@ -54,3 +54,13 @@ class Program
         // as loggerFactory gets disposed, this will flush the logs
     }
 }
+
+/*
+Challenges:
+* How do we allow people to write their own strong type logs with low cost / good perf?
+* How to enable multiple log streams, sending to different places (e.g. Audit Logs)? Having multiple factories?
+* How to discover and subscribe to logs that are provided by another lib which you don't own?
+* How to allow arbitrary Part C fields?
+* What's the guidance over EventSource vs. ILogger?
+* What's the guidance for logging scope?
+*/
