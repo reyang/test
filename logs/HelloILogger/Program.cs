@@ -40,11 +40,11 @@ class Program
                 {
                     logger.LogInformation("This is a test");
                 }
-                logger.Eat(new Food { Name = "burger from chick-fil-a", Price = 5.99 });
+                logger.Eat(new Food { Name = "artichoke", Price = 3.99 });
                 logger.LogEx(new Dictionary<string, object>{
                     ["foo"] = "1",
                     ["bar"] = "2",
-                }, 1);
+                });
             }
         }
 
