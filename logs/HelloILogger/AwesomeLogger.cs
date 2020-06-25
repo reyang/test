@@ -10,12 +10,12 @@ class AwesomeLogger : ILogger
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
     {
-        Console.WriteLine("This is awesome!");
         if (state is IReadOnlyCollection<KeyValuePair<string, object>> dict)
         {
+            Console.WriteLine("TState:");
             foreach (var entry in dict)
             {
-                Console.WriteLine($"{entry.Key}: {entry.Value}");
+                Console.WriteLine($"    {entry.Key}: {entry.Value}");
             }
         }
     }
