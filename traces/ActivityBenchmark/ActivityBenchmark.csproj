@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <!-- https://dotnet.microsoft.com/download/dotnet-core -->
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <!-- https://dotnet.microsoft.com/download/dotnet-framework -->
+    <!-- the .NET Benchmark tool itself doesn't support net452 -->
+    <TargetFrameworks Condition="$(OS) == 'Windows_NT'">$(TargetFrameworks);net461;net462</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.12.1" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="5.0.0-preview.7.20308.13" />
+  </ItemGroup>
+
+</Project>
