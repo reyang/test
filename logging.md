@@ -72,8 +72,6 @@
 
     ILogger has strong type extensibility in the following way, I wonder if we could do something to remove step 2 or make it easier.
 
-    **TODO: Reiley to include a potential solution here (LogEx)**
-
     1. Define your own strong type:
 
         ```csharp
@@ -130,7 +128,7 @@
 
     [Noah] use single factory, register multiple handlers, implement routing use filter rules (at factory level, or individual logger level).
 
-    ```json
+    ```javascript
     {
         "Logging": {      // Default, all providers.
             "LogLevel": {
