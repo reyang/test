@@ -3,10 +3,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using OpenTelemetry;
 
-internal class ReentrantExportProcessor<T> : BaseExportProcessor<T>
+internal class ConcurrentExportProcessor<T> : BaseExportProcessor<T>
     where T : class
 {
-    static ReentrantExportProcessor()
+    static ConcurrentExportProcessor()
     {
         var flags = BindingFlags.Instance | BindingFlags.NonPublic;
         var ctor = typeof(Batch<T>).GetConstructor(flags, null, new Type[] { typeof(T) }, null);
@@ -15,7 +15,7 @@ internal class ReentrantExportProcessor<T> : BaseExportProcessor<T>
         CreateBatch = lambda.Compile();
     }
 
-    public ReentrantExportProcessor(BaseExporter<T> exporter)
+    public ConcurrentExportProcessor(BaseExporter<T> exporter)
         : base(exporter)
     {
     }
