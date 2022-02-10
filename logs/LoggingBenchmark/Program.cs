@@ -22,11 +22,10 @@ public class LoggingBenchmark
     {
         this.loggerFactory = LoggerFactory.Create(builder =>
         {
-            /*
             builder.AddOpenTelemetry(options =>
             {
+                options.AddDummyLogExporter();
             });
-            */
         });
 
         this.logger = this.loggerFactory.CreateLogger<Program>();
@@ -52,6 +51,7 @@ public class LoggingBenchmark
             brandName: "Contoso",
             productDescription: "Salads",
             productType: "Food & Beverages",
+            productCode: 123,
             recallReasonDescription: "due to a possible health risk from Listeria monocytogenes",
             companyName: "Contoso Fresh Vegetables, Inc.");
     }
