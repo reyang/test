@@ -1,4 +1,4 @@
-internal struct PayloadClass
+internal class PayloadClass
 {
     public int    Field001 = 0;
     public float  Field002 = 2.718281828f;
