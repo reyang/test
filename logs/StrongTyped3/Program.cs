@@ -1,10 +1,32 @@
 using Microsoft.Extensions.Logging;
 
+/*
+In this scenario, strong-types are defined to represent "custom events", which can be considered as a self-contained log entry.
+
+* It is common for large organization to have a "core/infra" team defining/owning the log schema.
+* The developer has control over these "custom event" types.
+* There might be inheritance among these "custom event" types.
+
+FoodRecallLogRecord:
+  * BrandName
+  * ProductDescription
+  * ProductType
+  * ProductCode
+  * RecallReasonDescription
+  * CompanyName
+
+BaseLogRecord:
+  * EventId
+  * LogLevel
+  * Formatter (message string template)
+  * Exception (callstack)
+*/
+
 [StructuredLogMessage(
     EventId = 100,
     LogLevel = LogLevel.Critical,
     Message = "A `{ProductType}` (#{ProductCode}) recall notice was published for `{BrandName} {ProductDescription}` produced by `{CompanyName}` ({RecallReasonDescription}).")]
-public class FoodSupplyLogs
+public class FoodRecallLogRecord
 {
     public string BrandName;
     public string ProductDescription;
@@ -25,7 +47,7 @@ class Program
 
         var logger = loggerFactory.CreateLogger<Program>();
 
-        logger.Log(new FoodSupplyLogs
+        logger.Log(new FoodRecallLogRecord
         {
             BrandName = "Contoso",
             ProductDescription = "Salads",
