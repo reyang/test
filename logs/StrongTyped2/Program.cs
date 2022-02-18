@@ -1,19 +1,13 @@
 using Microsoft.Extensions.Logging;
 
-public static partial class FoodSupplyLogs
+public class FoodRecallLogRecord
 {
-    [LoggerMessage(
-        EventId = 100,
-        Message = "A `{productType}` (#{productCode}) recall notice was published for `{brandName} {productDescription}` produced by `{companyName}` ({recallReasonDescription}).")]
-    public static partial void FoodRecallNotice(
-        this ILogger logger,
-        LogLevel logLevel,
-        string brandName,
-        string productDescription,
-        string productType,
-        int productCode,
-        string recallReasonDescription,
-        string companyName);
+    public string BrandName;
+    public string ProductDescription;
+    public string ProductType;
+    public int ProductCode;
+    public string RecallReasonDescription;
+    public string CompanyName;
 }
 
 class Program
@@ -27,13 +21,24 @@ class Program
 
         var logger = loggerFactory.CreateLogger<Program>();
 
-        logger.FoodRecallNotice(
+        logger.Log(
             logLevel: LogLevel.Critical,
-            brandName: "Contoso",
-            productDescription: "Salads",
-            productType: "Food & Beverages",
-            productCode: 123,
-            recallReasonDescription: "due to a possible health risk from Listeria monocytogenes",
-            companyName: "Contoso Fresh Vegetables, Inc.");
+            eventId: 100,
+            state: new FoodRecallLogRecord
+            {
+                BrandName = "Contoso",
+                ProductDescription = "Salads",
+                ProductType = "Food & Beverages",
+                ProductCode = 123,
+                RecallReasonDescription = "due to a possible health risk from Listeria monocytogenes",
+                CompanyName = "Contoso Fresh Vegetables, Inc.",
+            },
+            exception: null,
+            formatter: (state, ex) =>
+            {
+                var record = state as FoodRecallLogRecord;
+                return $"A `{record.ProductType}` (#{record.ProductCode}) recall notice was published for `{record.BrandName} {record.ProductDescription}` produced by `{record.CompanyName}` ({record.RecallReasonDescription}).";
+            }
+        );
     }
 }
