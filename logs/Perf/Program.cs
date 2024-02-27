@@ -52,4 +52,3 @@ internal static partial class LoggerExtensions
     [LoggerMessage(Level = LogLevel.Information, Message = "Hello from {food} {price}.")]
     public static partial void SayHello(this ILogger logger, string food, double price);
 }
-
