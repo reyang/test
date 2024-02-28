@@ -1,3 +1,5 @@
+// To run the benchmark, simply run `dotnet run -c Release`
+
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Microsoft.Extensions.Logging;
